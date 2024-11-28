@@ -1,0 +1,12 @@
+﻿@using static ZCodBlazorCourse.Pages.Home
+<h3>UserComponent</h3>
+
+@Content(Model)
+
+@code {
+    [Parameter]
+    public UserDto Model { get; set; }
+
+    [Parameter]
+    public RenderFragment<UserDto> Content { get; set; }
+}

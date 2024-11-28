@@ -1,7 +1,58 @@
 ﻿@page "/"
+@using ZCodBlazorCourse.Components
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<ProductComponent>
+    <Content>
+        <div>
+            <h1 style="color:blue">from home</h1>
+        </div>
+    </Content>
+
+    <Content2>
+        <p>content 2</p>
+    </Content2>
+</ProductComponent>
+
+@foreach (var item in Users)
+{
+    <UserComponent Model="item" @key="item.Id">
+        <Content Context="xyz">
+            <h1>id : @xyz.Id</h1>
+            <h1>name : @xyz.Name</h1>
+        </Content>
+    </UserComponent>
+}
+
+
+@code {
+    public UserDto User { get; set; } = new UserDto
+    {
+        Id = 1,
+        Name = "A"
+    };
+
+    public List<UserDto> Users = new List<UserDto>
+    {
+        new UserDto
+        {
+            Id = 1,
+            Name = "A"
+        },
+        new UserDto
+        {
+            Id = 2,
+            Name = "B"
+        }
+    };
+    public class UserDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+}
