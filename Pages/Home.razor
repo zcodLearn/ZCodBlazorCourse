@@ -1,7 +1,101 @@
 ﻿@page "/"
+@using System.ComponentModel.DataAnnotations
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+
+<EditForm EditContext="_editContext">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="row">
+        <div class="col-md-3">
+            <InputText @bind-Value="@_model.Name" class="form-control" />
+            @* <input type="text" class="form-control" @bind-value="_model.Name" /> *@
+            <ValidationMessage For="@(() => _model.Name)" />
+        </div>
+        <div class="col-md-3">
+            <InputText @bind-Value="@_model.LastName" class="form-control" />
+            @* <input type="text" class="form-control" @bind-value="_model.LastName" /> *@
+            <ValidationMessage For="@(() => _model.LastName)" />
+        </div>
+
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary" @onclick="SubmitEditContext">
+                SubmitEditContext
+            </button>
+        </div>
+    </div>
+
+</EditForm>
+
+@*
+<EditForm Model="_model" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="row">
+        <div class="col-md-3">
+            <InputText @bind-Value="@_model.Name" class="from-control" />
+            <input type="text" class="form-control" @bind-value="_model.Name" />
+
+            <ValidationMessage For="@(() => _model.Name)" />
+        </div>
+        <div class="col-md-3">
+            <InputText @bind-Value="@_model.LastName" class="from-control" />
+            <input type="text" class="form-control" @bind-value="_model.LastName" />
+            <ValidationMessage For="@(() => _model.LastName)" />
+        </div>
+
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">
+                Submit
+            </button>
+        </div>
+    </div>
+
+</EditForm>
+ *@
+
+@code {
+    protected override void OnInitialized()
+    {
+        _editContext = new(_model);
+
+        base.OnInitialized();
+    }
+    private EditContext _editContext;
+    private UserDto _model = new UserDto();
+    public class UserDto
+    {
+        public int Id { get; set; }
+        [Required(ErrorMessage = "name is required !")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "last name is required !")]
+        public string LastName { get; set; }
+    }
+
+    public Task Submit()
+    {
+        Console.WriteLine("form submited");
+        return Task.CompletedTask;
+    }
+    public Task SubmitEditContext()
+    {
+        if (_editContext.Validate())
+        {
+            Console.WriteLine("OK");
+            // --- save data
+        }
+        else
+        {
+            Console.WriteLine("No");
+            // -- error
+        }
+
+        return Task.CompletedTask;
+    }
+}
