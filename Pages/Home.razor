@@ -1,7 +1,25 @@
 ﻿@page "/"
+@inject IJSRuntime js
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+<button class="btn btn-primary" @onclick="RunJS">
+    Invoke Void Async
+</button>
+
+<button class="btn btn-primary" @onclick="RunSumJS">
+    Invoke Async
+</button>
+@code {
+    public async Task RunJS()
+    {
+        await js.InvokeVoidAsync("MyJSMethod",20,"Ali");
+    }
+    public async Task RunSumJS()
+    {
+        var result = await js.InvokeAsync<object>("Sum",20,50);
+
+    }
+}
