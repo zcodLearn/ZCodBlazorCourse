@@ -1,0 +1,25 @@
+﻿@using ZCodBlazorCourse.Pages
+
+<h3 style="color:@Home.GetColor()">ProductComponent</h3>
+<h3>Age : @Home.Age</h3>
+
+<button class="btn btn-primary" @onclick="ChangeMyColor">
+    Change Home Color
+</button>
+<button class="btn btn-primary" @onclick="ChangeAge">
+    Change Age
+</button>
+@code {
+    [CascadingParameter]
+    public Home Home { get; set; }
+
+    public void ChangeMyColor()
+    {
+        Home.ChangeColor("red");
+    }
+    public void ChangeAge()
+    {
+        Home.Age = 300;
+        StateHasChanged();
+    }
+}

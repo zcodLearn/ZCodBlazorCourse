@@ -1,7 +1,37 @@
 ﻿@page "/"
+@using ZCodBlazorCourse.Components
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1 style="color:@myColor">
+    Home Age : @Age
+</h1>
+@* 
+<CascadingValue Value="Age"> 
+    <CascadingValue Value="Age2">
+        <CascadingValue Value="Name" Name="UserName">
+            <UserComponent />
+        </CascadingValue>
+    </CascadingValue>
+</CascadingValue> *@
 
-Welcome to your new app.
+<CascadingValue Value="this">
+    <ProductComponent />
+</CascadingValue>
+
+@code {
+    // public int Age { get; set; } = 30;
+    // public int Age2 { get; set; } = 20;
+    // public string Name { get; set; } = "ali";
+    public void ChangeColor(string color)
+    {
+        myColor = color;
+        StateHasChanged();
+    }
+    public int Age { get; set; } = 10;
+    private string myColor = "blue";
+    public string GetColor()
+    {
+        return myColor;
+    }
+}

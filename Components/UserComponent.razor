@@ -1,0 +1,16 @@
+﻿<h3>UserComponent</h3>
+
+<h1>
+    User Age : @MyAge
+</h1>
+<h1>
+    My User Name : @MyUserName
+</h1>
+
+@code {
+    [CascadingParameter]
+    public int MyAge { get; set; }
+
+    [CascadingParameter(Name = "UserName")]
+    public string MyUserName { get; set; }
+}
