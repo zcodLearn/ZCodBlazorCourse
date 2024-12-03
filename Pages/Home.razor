@@ -3,7 +3,7 @@
 
 <PageTitle>Home</PageTitle>
 
-<EditForm Model="User" OnValidSubmit="Submit">
+<EditForm EditContext="editContext">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -21,16 +21,45 @@
             <ValidationMessage For="@(() => User.LastName)" />
         </div>
         <div class="col-md-12">
-            <button class="btn btn-primary" type="submit">
+            <button class="btn btn-primary" type="button" @onclick="Submit2">
                 Submit
             </button>
         </div>
     </div>
 </EditForm>
 
+@* <EditForm Model="User" OnSubmit="Submit" Context="ctx1">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="row">
+        <div class="col-md-4">
+            <label>Name</label>
+            <input type="text" class="form-control @(ctx1.FieldCssClass(() => User.Name))" @bind-value="@User.Name" />
+            <InputText class="form-control" @bind-Value="User.Name" />
+            <ValidationMessage For="@(() => User.Name)" />
+        </div>
+        <div class="col-md-4">
+            <label>LastName</label>
+            <input type="text" class="form-control @(ctx1.FieldCssClass(ctx1.Field(nameof(User.LastName))))" @bind-value="@User.LastName" />
+            <InputText class="form-control" @bind-Value="User.LastName" />
+            <ValidationMessage For="@(() => User.LastName)" />
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-primary" type="submit">
+                Submit
+            </button>
+        </div>
+    </div>
+</EditForm> *@
 @code {
     public UserDto User = new UserDto();
-
+    public EditContext editContext { get; set; }
+    protected override Task OnInitializedAsync()
+    {
+        editContext = new(User);
+        return base.OnInitializedAsync();
+    }
     public class UserDto
     {
         public int Id { get; set; }
@@ -40,8 +69,22 @@
         public string LastName { get; set; }
     }
 
-    public async Task Submit()
+    public async Task Submit(EditContext editContext)
     {
-        
+        bool isValid = editContext.Validate();
+
+        if (isValid)
+        {
+
+        }else
+        {
+            
+        }
+    }
+    public async Task Submit2()
+    {
+        if (editContext.Validate())
+        {
+        }
     }
 }
