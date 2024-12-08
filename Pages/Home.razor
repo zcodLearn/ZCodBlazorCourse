@@ -5,3 +5,75 @@
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+<ZCodBlazorCourse.Components.UserComponent Name="@name" Render="@userShouldRender" />
+<ZCodBlazorCourse.Components.ProductComponent Name="@name" Render="@productShouldRender" />
+<h3>@name</h3>
+
+<button class="btn btn-primary" @onclick="Submit">
+    Submit
+</button>
+
+@code {
+    private string name = "ali";
+    private bool shouldRender = true;
+    private bool userShouldRender = true;
+    private bool productShouldRender = true;
+    private async Task Submit()
+    {
+        name = "reza";
+        userShouldRender = false;
+        // shouldRender = false;
+        await Task.Delay(3000);
+        // shouldRender = true;
+        userShouldRender = true;
+    }
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("OnInitialized");
+        base.OnInitialized();
+    }
+    protected override Task OnInitializedAsync()
+    {
+        Console.WriteLine("OnInitializedAsync");
+        return base.OnInitializedAsync();
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Console.WriteLine("OnAfterRender");
+        if (firstRender)
+        {
+            // ---
+        }
+
+        // StateHasChanged();
+        base.OnAfterRender(firstRender);
+    }
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine("OnAfterRenderAsync");
+        return base.OnAfterRenderAsync(firstRender);
+    }
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("OnParametersSet");
+        base.OnParametersSet();
+    }
+    protected override Task OnParametersSetAsync()
+    {
+        Console.WriteLine("OnParametersSetAsync");
+        return base.OnParametersSetAsync();
+    }
+    protected override bool ShouldRender()
+    {
+        Console.WriteLine("ShouldRender");
+        return shouldRender;
+    }
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        var dictionary = parameters.ToDictionary();
+        // var result = parameters.GetValueOrDefault<string>(nameof(LastName));
+
+        Console.WriteLine("SetParametersAsync");
+        return base.SetParametersAsync(parameters);
+    }
+}
