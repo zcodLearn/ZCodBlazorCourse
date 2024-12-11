@@ -1,0 +1,15 @@
+﻿
+<div class="card-component">
+    <div class="card-image-box">
+        <img src="@Image" />
+    </div>
+    <h6>
+        @Title
+    </h6>
+    @if (!string.IsNullOrWhiteSpace(Description))
+    {
+        <p>
+            @Description
+        </p>
+    }
+</div>

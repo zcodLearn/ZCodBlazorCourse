@@ -1,7 +1,21 @@
 ﻿@page "/"
+@using ZCodBlazorCourse.Components
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in blogs)
+        {
+            <div class="col-md-4 mt-3">
+                <CardComponent @key="@item.Id" Title="@item.Title" Image="@item.Image" Description="@item.Description" />
+            </div>
+        }
+    </div>
+</div>
+
+
