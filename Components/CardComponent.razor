@@ -1,15 +1,16 @@
-﻿
+﻿@typeparam TValue
+
 <div class="card-component">
     <div class="card-image-box">
-        <img src="@Image" />
+        <img src="@image" />
     </div>
     <h6>
-        @Title
+        @title
     </h6>
-    @if (!string.IsNullOrWhiteSpace(Description))
+    @if (!string.IsNullOrWhiteSpace(description))
     {
         <p>
-            @Description
+            @description
         </p>
     }
 </div>

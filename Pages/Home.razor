@@ -12,7 +12,10 @@ Welcome to your new app.
         @foreach (var item in blogs)
         {
             <div class="col-md-4 mt-3">
-                <CardComponent @key="@item.Id" Title="@item.Title" Image="@item.Image" Description="@item.Description" />
+                @* <CardComponent @key="@item.Id" Title="@item.Title" Image="@item.Image" Description="@item.Description" /> *@
+                @* <CardComponent @key="@item.Id" Blog="@item" /> *@
+                @* <CardComponent @key="item.Id" Data="item" /> *@
+                <CardComponent @key="item.Id" Data="@item" TValue="BlogDto" ImageName="@(nameof(BlogDto.Image))" TitleName="@(nameof(BlogDto.Title))" DescriptionName="@(nameof(BlogDto.Description))" />
             </div>
         }
     </div>

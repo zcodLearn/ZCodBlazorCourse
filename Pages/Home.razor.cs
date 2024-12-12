@@ -5,6 +5,7 @@ namespace ZCodBlazorCourse.Pages
     public partial class Home
     {
         private List<BlogDto> blogs = new();
+        //private List<CardComponentDto> cardComponentData = new();
         protected override void OnInitialized()
         {
             blogs.Add(new BlogDto
@@ -49,6 +50,20 @@ namespace ZCodBlazorCourse.Pages
                 Image = "/images/6.webp",
                 Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut"
             });
+
+            //blogs.ForEach(p =>
+            //{
+            //    var card = new CardComponentDto
+            //    {
+            //        Id = p.Id,
+            //        Title = p.Title , 
+            //        Description = p.Description , 
+            //        Image = p.Image , 
+            //        Icon = "far fa-check"
+            //    };
+
+            //    cardComponentData.Add(card);
+            //});
             base.OnInitialized();
         }
     }
