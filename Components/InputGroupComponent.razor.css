@@ -1,0 +1,39 @@
+﻿
+
+.input-group-component {
+    display: flex;
+    flex-direction:column;
+    align-items:start;
+    gap: 10px;
+    justify-content: start;
+}
+    .input-group-component label {
+        font-weight:bold;
+        font-size:13px;
+    }
+.input-group-box {
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content:start;
+}
+    .input-group-box input {
+        min-height: 36px;
+        border: 1px solid #606060;
+        background: white;
+        border-radius: 6px;
+        padding: 4px 10px;
+        -moz-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+    .input-group-box input:focus, .input-group-box input:active {
+        border-color: #0034ff;
+        outline: 3px solid #aebfff;
+    }
+
+.input-group-button-template {
+    background: #c7c7c7;
+    border: unset;
+}
