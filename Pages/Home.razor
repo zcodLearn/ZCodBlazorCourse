@@ -1,6 +1,6 @@
 ﻿@page "/"
 @using ZCodBlazorCourse.Components
-
+@inject IConfiguration config
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
@@ -11,7 +11,13 @@ Welcome to your new app.
     @Description
 </h3>
 
-<CKEditor DisplayName="Description" @bind-Value="Description" />
+<CKEditor DisplayName="Description" UrlToPostImage="@imagePostUrl" @bind-Value="Description" />
 @code {
+    private string imagePostUrl = "";
+    protected override void OnInitialized()
+    {
+        imagePostUrl = string.Concat(config.GetValue<string>("ApiBaseUrl") , "/api/upload/uploadImage");
+        base.OnInitialized();
+    }
     public string Description { get; set; }
 }
