@@ -1,0 +1,83 @@
+﻿
+<div class="select-image-container">
+    @foreach (var item in Items)
+    {
+        <div class="select-image-box @(selectedItems.Contains(item) ? "image-box-selected" : "")">
+            <img src="@item.Src" />
+
+            <div class="select-image-buttons">
+                <button class="btn btn-primary" @onclick="@(() => Add(item))">Add</button>
+                <button class="btn btn-danger" @onclick="@(() => Delete(item))">Delete</button>
+            </div>
+        </div>
+    }
+    
+</div>
+@code {
+    [Parameter]
+    public List<SelectImageDto> Items { get; set; }
+    private List<SelectImageDto> selectedItems { get; set; } = new List<SelectImageDto>();
+    [Parameter]
+    public EventCallback<SelectImageDto> OnAdd { get; set; }
+    [Parameter]
+    public EventCallback<SelectImageDto> OnDelete { get; set; }
+    public class SelectImageDto
+    {
+        public int UniqueId { get; set; }
+        public string Src { get; set; }
+    }
+
+    private async Task Add(SelectImageDto item)
+    {
+        if (!selectedItems.Any(p => p.UniqueId == item.UniqueId))
+        {
+            selectedItems.Add(item);
+        }
+
+        await OnAdd.InvokeAsync(item);
+    }
+    private async Task Delete(SelectImageDto item)
+    {
+        if (selectedItems.Any(p => p.UniqueId == item.UniqueId))
+        {
+            selectedItems.Remove(item);
+        }
+
+        await OnDelete.InvokeAsync(item);
+    }
+}
+<style>
+    .select-image-container {
+        display:flex;
+        gap:15px;
+        align-items:center;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .select-image-box {
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        border-radius:10px;
+        border:2px solid #ededed;
+        background:white;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+        transition:all 0.2s ease-in-out;
+        max-width:180px;
+        overflow:hidden;
+    }
+     .select-image-box:hover{
+         box-shadow: 0 0 12px gray;
+         border-color:#ffdddd;
+     }
+
+        .select-image-box img {
+            width:100%;
+        }
+    .image-box-selected {
+        border-color: green;
+    }
+</style>

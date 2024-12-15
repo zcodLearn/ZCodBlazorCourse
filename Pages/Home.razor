@@ -1,7 +1,48 @@
 ﻿@page "/"
+@using static ZCodBlazorCourse.Components.SelectImage
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<ZCodBlazorCourse.Components.SelectImage 
+        OnAdd="OnAddImage"
+        OnDelete="OnDeleteImage"
+        Items="ImageItems" />
+
+@code {
+    private void OnAddImage(SelectImageDto image)
+    {
+        MySelectedImages.Add(image);
+    }
+    private void OnDeleteImage(SelectImageDto image)
+    {
+        MySelectedImages.Remove(image);
+    }
+    public List<SelectImageDto> MySelectedImages = new List<SelectImageDto>();
+    public List<SelectImageDto> ImageItems { get; set; } = new List<SelectImageDto>
+    {
+        new SelectImageDto
+        {
+            UniqueId = 1,
+            Src = "/images/1.jpg"
+        },
+        new SelectImageDto
+        {
+            UniqueId = 2,
+            Src = "/images/2.jpg"
+        },
+        new SelectImageDto
+        {
+            UniqueId = 3,
+            Src = "/images/3.jpg"
+        },
+        new SelectImageDto
+        {
+            UniqueId = 4,
+            Src ="/images/4.jpg"
+        }
+    };
+}
